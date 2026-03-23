@@ -170,7 +170,7 @@ export default function MovieModal({ movie, detail, detLoad, onClose, myRating, 
                     style={{ background: box.bg, border: `1px solid ${box.bdr}`, boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}
                   >
                     <div className="text-[9px] tracking-[.16em] uppercase mb-1.5 font-semibold" style={{ color: box.lc }}>{box.label}</div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <Stars value={box.starsVal} size={15} fillColor={box.sf} strokeColor={box.ss} />
                       <span className="font-mono text-sm font-bold" style={{ color: box.vc }}>{box.val}</span>
                       {box.sub && <span className="font-mono text-[10px]" style={{ color: box.lc }}>{box.sub}</span>}
@@ -217,7 +217,7 @@ export default function MovieModal({ movie, detail, detLoad, onClose, myRating, 
                   {myRating ? "Your Rating" : "Rate This Film"}
                 </div>
                 {myRating ? (
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 flex-wrap">
                     <Stars value={myRating} size={22} fillColor={dark ? "#f59e0b" : "#3b82f6"} strokeColor={dark ? "#fcd34d" : "#93c5fd"} />
                     <span className="text-[14px] font-medium" style={{ color: dark ? "#a78bfa" : "#1d4ed8" }}>
                       You rated it {myRating}/5 ✨
