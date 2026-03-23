@@ -1,0 +1,46 @@
+/* ── Card Flip Styles ── */
+.card-appear {
+  animation: cardIn 0.42s ease both;
+}
+
+.flip-wrap {
+  perspective: 1100px;
+  cursor: pointer;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2/3;
+  transform-style: preserve-3d;
+  transition: transform 0.62s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 16px;
+}
+
+.flip-wrap:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.flip-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}

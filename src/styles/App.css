@@ -1,0 +1,54 @@
+/* ── Main Layout ── */
+.app-container {
+  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+  transition: background 0.4s, color 0.4s;
+}
+
+main {
+  padding: 26px 28px;
+}
+
+/* ── Section Header ── */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.section-title {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section-count {
+  font-size: 12px;
+  font-family: monospace;
+}
+
+/* ── Empty State ── */
+.empty-state {
+  text-align: center;
+  padding: 90px 0;
+}
+
+.empty-state svg {
+  margin-bottom: 12px;
+}
+
+.empty-state-text {
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Movie Grid ── */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  gap: 18px;
+}

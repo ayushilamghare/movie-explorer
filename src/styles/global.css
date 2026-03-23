@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Lora:ital,wght@0,600;0,700;1,500&display=swap');
+
+/* Global reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Button and Input */
+button, input {
+  font-family: 'Outfit', sans-serif;
+}
+
+input:focus {
+  outline: none;
+}
+
+/* ── Nav orb animations ── */
+@keyframes float1 {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-7px) scale(1.04); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(4deg); }
+}
+
+@keyframes navReveal {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Loader ── */
+@keyframes spinC {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spinA {
+  0% { transform: rotate(45deg); }
+  100% { transform: rotate(405deg); }
+}
+
+/* ── Modal ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(28px) scale(.97); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Card ── */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.card-appear {
+  animation: cardIn .42s ease both;
+}
+
+/* ── Flip card ── */
+.flip-wrap {
+  perspective: 1100px;
+  cursor: pointer;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2/3;
+  transform-style: preserve-3d;
+  transition: transform .62s cubic-bezier(.175, .885, .32, 1.275);
+  border-radius: 16px;
+}
+
+.flip-wrap:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.flip-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+/* ── Skeleton shimmer ── */
+@keyframes sk {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
