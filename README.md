@@ -11,12 +11,6 @@ View detailed movie information including description and cast
 Rate movies using a 1–5 star system
 View average ratings visually
 
-
-## TMDB API
-
-Uses Bearer token authentication. Replace `TMDB_TOKEN` in `constants.js` with your own token from [themoviedb.org](https://www.themoviedb.org/settings/api).
-
-
 ## Deployment
 Hosted on Netlify
 Source code available on GitHub
