@@ -11,6 +11,7 @@ View detailed movie information including description and cast
 Rate movies using a 1–5 star system
 View average ratings visually
 
+
 ## Deployment
 Hosted on Netlify
 Source code available on GitHub
