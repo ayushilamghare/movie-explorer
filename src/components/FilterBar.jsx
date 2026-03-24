@@ -3,7 +3,8 @@
  * Tailwind-first, with dynamic colors for dark/light
  */
 export default function FilterBar({ dark, year, onYear, minRating, onMinRating }) {
-    const years = ["All", ...Array.from({ length: 36 }, (_, i) => 2025 - i)];
+    const currentYear = new Date().getFullYear();
+    const years = ["All", ...Array.from({ length: 36 }, (_, i) => currentYear - i)];
     const ratings = [
         { label: "Any Rating", value: 0 },
         { label: "★ 1+", value: 1 },

@@ -1,6 +1,5 @@
 // ─── API ────────────────────────────────────────────────────
-export const TMDB_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MjY1YmQxNjc5NjYzYTdlYTEyYWMxNjhkYTg0ZDJlOCIsInN1YiI6IjY0NzZiY2NmMjFhZGQ3MDBhZTkwNjgwMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YMigFMjGBxm3bJmm_DkqPp6GNiIkjJqSqORyGn_kMgM";
+export const TMDB_TOKEN = import.meta.env.VITE_TMDB_TOKEN;
 export const IMG_URL = "https://image.tmdb.org/t/p/w500";
 export const BG_URL = "https://image.tmdb.org/t/p/w1280";
 export const TMDB_HEADERS = { Authorization: `Bearer ${TMDB_TOKEN}` };

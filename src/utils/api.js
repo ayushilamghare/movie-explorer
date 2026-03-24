@@ -1,5 +1,17 @@
 import { TMDB_HEADERS, FALLBACK } from "../components/constants.js";
 
+async function fetchJson(path) {
+  const res = await fetch(`https://api.themoviedb.org/3${path}`, {
+    headers: TMDB_HEADERS,
+  });
+
+  if (!res.ok) {
+    throw new Error(`TMDB request failed: ${res.status}`);
+  }
+
+  return res.json();
+}
+
 /**
  * Fetch movies from TMDB API or return fallback data
  * @param {string} searchQuery - Search term or empty string for popular movies
@@ -11,16 +23,11 @@ export async function fetchMovies(searchQuery) {
       ? `/search/movie?query=${encodeURIComponent(searchQuery)}&page=1`
       : `/movie/popular?page=1`;
 
-    const res = await fetch(
-      `https://api.themoviedb.org/3${path}`,
-      { headers: TMDB_HEADERS }
-    );
-
-    const data = await res.json();
+    const data = await fetchJson(path);
     const result = data.results?.filter(m => m.poster_path) || [];
-    return result.length ? result : FALLBACK;
+    return searchQuery.trim() ? result : (result.length ? result : FALLBACK);
 
-  } catch (error) {
+  } catch {
     // Fallback to local data on error
     const q = searchQuery.toLowerCase();
     return q
@@ -35,14 +42,10 @@ export async function fetchMovies(searchQuery) {
  * @returns {Promise<Object>} Object with details and cast
  */
 export async function fetchMovieDetail(movieId) {
-  try {
-    const [det, cred] = await Promise.all([
-      fetch(`https://api.themoviedb.org/3/movie/${movieId}`, { headers: TMDB_HEADERS }).then(r => r.json()),
-      fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits`, { headers: TMDB_HEADERS }).then(r => r.json()),
-    ]);
+  const [det, cred] = await Promise.all([
+    fetchJson(`/movie/${movieId}`),
+    fetchJson(`/movie/${movieId}/credits`),
+  ]);
 
-    return { ...det, cast: cred.cast?.slice(0, 6) || [] };
-  } catch (error) {
-    throw error;
-  }
+  return { ...det, cast: cred.cast?.slice(0, 6) || [] };
 }

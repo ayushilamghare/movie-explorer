@@ -25,9 +25,8 @@ export function filterBySearch(movies, searchTerm) {
  * Search takes priority; when active genre is ignored.
  */
 export function filterMovies(movies, searchTerm, genre, year = "All", minRating = 0) {
-  let result = searchTerm.trim()
-    ? filterBySearch(movies, searchTerm)
-    : filterByGenre(movies, genre);
+  let result = filterBySearch(movies, searchTerm);
+  result = filterByGenre(result, genre);
 
   // Year filter
   if (year && year !== "All") {
@@ -46,6 +45,9 @@ export function filterMovies(movies, searchTerm, genre, year = "All", minRating 
  * Get section title based on active filters
  */
 export function getSectionTitle(searchTerm, genre) {
+  if (searchTerm.trim() && genre !== "All") {
+    return `Results for "${searchTerm.trim()}" in ${genre}`;
+  }
   if (searchTerm.trim()) return `Results for "${searchTerm.trim()}"`;
   return genre === "All" ? "Popular Films" : genre;
 }

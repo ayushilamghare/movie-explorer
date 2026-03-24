@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "./components/Navbar.jsx";
 import GenreStrip from "./components/GenreStrip.jsx";
 import FilterBar from "./components/FilterBar.jsx";
@@ -25,6 +25,7 @@ export default function App() {
   const [modal, setModal] = useState(null);
   const [detail, setDetail] = useState(null);
   const [detLoad, setDetLoad] = useState(false);
+  const detailRequestRef = useRef(0);
 
   const dSearch = useDebounce(search, 360);
   const scrolled = useScrolled(12);
@@ -48,27 +49,37 @@ export default function App() {
 
   // ── Open modal ───────────────────────────────────────────
   async function openModal(movie) {
+    const requestId = detailRequestRef.current + 1;
+    detailRequestRef.current = requestId;
     setModal(movie);
     setDetail(null);
     setDetLoad(true);
     try {
       const details = await fetchMovieDetail(movie.id);
-      setDetail(details);
+      if (detailRequestRef.current === requestId) {
+        setDetail(details);
+      }
     } catch {
-      setDetail({
-        ...movie,
-        genres: (movie.genre_ids || []).slice(0, 3).map(id => ({ id, name: GENRE_MAP[id] || "" })),
-        runtime: 0,
-        cast: [],
-      });
+      if (detailRequestRef.current === requestId) {
+        setDetail({
+          ...movie,
+          genres: (movie.genre_ids || []).slice(0, 3).map(id => ({ id, name: GENRE_MAP[id] || "" })),
+          runtime: 0,
+          cast: [],
+        });
+      }
     } finally {
-      setDetLoad(false);
+      if (detailRequestRef.current === requestId) {
+        setDetLoad(false);
+      }
     }
   }
 
   function closeModal() {
+    detailRequestRef.current += 1;
     setModal(null);
     setDetail(null);
+    setDetLoad(false);
   }
 
   // ── Filtered list ────────────────────────────────────────
